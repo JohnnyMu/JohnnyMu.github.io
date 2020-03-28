@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 
 
@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" type="image/png" href="/img/favicon.jpg">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,7 +47,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Johnny</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>Johnny's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -64,7 +64,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/">首页</a>
           </li>
         
           
@@ -72,7 +72,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/archives/">Archives</a>
+            <a class="nav-link" href="/archives/">归档</a>
           </li>
         
           
@@ -80,7 +80,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/categories/">Categories</a>
+            <a class="nav-link" href="/categories/">分类</a>
           </li>
         
           
@@ -88,7 +88,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/tags/">Tags</a>
+            <a class="nav-link" href="/tags/">标签</a>
           </li>
         
           
@@ -96,7 +96,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/about/">About</a>
+            <a class="nav-link" href="/about/">关于</a>
           </li>
         
         
@@ -111,7 +111,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/nav4.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -148,28 +148,54 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a href="/2020/03/27/%E5%BC%80%E7%AB%99%E6%96%87/">
-        <p class="h4 index-header">测试</p>
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/28/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0%EF%BC%9A%E9%98%B2%E7%9B%97%E9%93%BE%E4%B8%8Ex-tengine-error-denied-by-Referer-ACL/" target="_self">
+          <img src="/img/blog-post2.jpg" srcset="/img/loading.gif" alt="踩坑日记：防盗链与x-tengine-error: denied by Referer ACL"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/28/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0%EF%BC%9A%E9%98%B2%E7%9B%97%E9%93%BE%E4%B8%8Ex-tengine-error-denied-by-Referer-ACL/">
+        <p class="h4 index-header">踩坑日记：防盗链与x-tengine-error: denied by Referer ACL</p>
       </a>
 
-      <a href="/2020/03/27/%E5%BC%80%E7%AB%99%E6%96%87/">
+      <a href="/2020/03/28/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0%EF%BC%9A%E9%98%B2%E7%9B%97%E9%93%BE%E4%B8%8Ex-tengine-error-denied-by-Referer-ACL/">
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">标题一大家好
-标题二大家好
-</div>
+          <div class="index-text mb-1">踩坑之前的写的知乎日报项目https://blog.csdn.net/johnny_mu/article/details/105128678
+客户端曾爆出了这个403错误
+
+看起来好像是css文件被跨域限制了，无法引用。那就用之前图片的代理服务器转发一下就好了。
+
+我一开始以为是跨域限制导致的css文件无法加载，所以用代理服务器转发一下，设置上相应header字段就好，问题确实就解决了。
+但是昨晚睡前一想，不对啊，css，图片等静态资源是不会被跨域限制的。于是我试了一下真正跨域限制的报错。果然不一样。再试一下，将图片代理服务器中的取消跨域限制的代码注释掉
+res.setHeader(&#39;</div>
         </div>
       </a>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-28&nbsp;&nbsp;
         
         
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/">踩坑日记</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+          
+            <a href="/tags/http/">http</a>&nbsp;
+          
+            <a href="/tags/node/">node</a>&nbsp;
+          
         
       </div>
     </div>
@@ -178,29 +204,273 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a href="/2020/03/27/hello-world/">
-        <p class="h4 index-header">Hello World</p>
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/28/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A52-0/" target="_self">
+          <img src="/img/blog-post2.jpg" srcset="/img/loading.gif" alt="Vue实战：知乎日报2.0"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/28/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A52-0/">
+        <p class="h4 index-header">Vue实战：知乎日报2.0</p>
       </a>
 
-      <a href="/2020/03/27/hello-world/">
+      <a href="/2020/03/28/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A52-0/">
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server$ hexo server</div>
+          <div class="index-text mb-1">之前跟着《Vue.js实战》写过这个小项目，因为书中的代码比较久远，许多接口、webpack配置都失效了，但这个项目还是很好玩的，最近整理了一下，本文的代码都是相对于原书代码的补充。完整代码:https://github.com/JohnnyMu/zhihuDaily
+
+webpack配置虽然最新的webpack已经是4.0版本。但与书中的webpack2大多能兼容，只有几个地方稍有变化
+vue-loadervue-loader@15.x 版本相较之前需要增加一些配置
+//webpack.config.js
+const VueLoaderPlugin = require(&#39;vue-lo</div>
         </div>
       </a>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-28&nbsp;&nbsp;
         
         
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/">前端工程</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Vue/">Vue</a>&nbsp;
+          
+            <a href="/tags/webpack/">webpack</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/28/Promise%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/" target="_self">
+          <img src="/img/blog-post1.jpg" srcset="/img/loading.gif" alt="Promise理解与实现"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/28/Promise%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+        <p class="h4 index-header">Promise理解与实现</p>
+      </a>
+
+      <a href="/2020/03/28/Promise%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">promise解决了什么问题JavaScript是单线程的，所以我们要用一些异步编程方案来实现异步。回调函数就是其中的一种方案，比如说在node中写读取一个文件，使用回调函数这是没有问题的。
+fs.readFile(&#39;/etc/passwd&#39;, function (err, data) {
+  if (err) throw err;
+  console.log(data);
+});
+但如果新的需求是必须先读取A文件，才能读取B文件
+fs.readFile(fileA, function (err, data) {
+    fs.readFile(fileB, function </div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/28/%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6%E7%90%86%E8%A7%A3%E4%B8%8E%E8%A7%A3%E5%86%B3/" target="_self">
+          <img src="/img/blog-post3.jpg" srcset="/img/loading.gif" alt="同源限制理解与解决"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/28/%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6%E7%90%86%E8%A7%A3%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+        <p class="h4 index-header">同源限制理解与解决</p>
+      </a>
+
+      <a href="/2020/03/28/%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6%E7%90%86%E8%A7%A3%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">同源策略是浏览器对JavaScript代码能够操作哪些web内容的一条完整的安全限制。
+什么是同源URL由协议、域名、端口和路径组成，如果两个URL的协议、域名和端口相同，则表示他们同源。下表给出了相对http://store.company.com/dir/page.html同源检测的示例:
+
+
+
+URL
+结果
+原因
+
+
+
+http://store.company.com/dir2/other.html
+成功
+只有路径不同
+
+
+http://store.company.com/dir/inner/another.html
+成功
+只有路径不同
+
+
+https://store.company.c</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+          
+            <a href="/tags/http/">http</a>&nbsp;
+          
+            <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/" target="_self">
+          <img src="/img/js2.jpg" srcset="/img/loading.gif" alt="JavaScript学习笔记二"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">
+        <p class="h4 index-header">JavaScript学习笔记二</p>
+      </a>
+
+      <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">数组是值的有序集合。每个值叫做一个元素，而每个元素在数组中的位置，以数字表示，称为索引。JavaScript数组是JavaScript对象的特殊形式，数组索引实际上和碰巧是整数的属性名差不多。通常，数组的实现是经过优化的，用数字索引来访问数组元素一般来说比访问常规的对象属性要快很多JavaScript数组可以包含任意数据类型
+创建数组
+使用数组字面量[]JavaScript数组可以包含任意数据类型 var arr = [1,2,&#39;hello&#39;,null,undefined,true,{&#39;hei&#39;:&#39;黑&#39;},[1,2]];
+ arr.length;</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_self">
+          <img src="/img/js1.jpg" srcset="/img/loading.gif" alt="JavaScript学习笔记一"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        <p class="h4 index-header">JavaScript学习笔记一</p>
+      </a>
+
+      <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">打算把最近学习的JavaScript写个博客整理记录一下，学习方式是《JavaScript语言精粹》这本书和廖雪峰的博客，不太明白的地方会去看《JavaScript权威指南》、JavaScript|MDN和W3School。
+数据类型JavaScript 变量能够保存多种数据类型：数值、字符串值、数组、对象等等：
+NumbersJavaScript只有一种数字类型，不区分整型与浮点型，存储方式使用64位浮点数，1和1.0的值是相同的。
+123; // 整数123
+0.456; // 浮点数0.456
+1.2345e3; // 科学计数法表示1.2345x1000，等同于1234.5
+-99; </div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+          
         
       </div>
     </div>
@@ -230,7 +500,7 @@ Run server$ hexo server</div>
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -239,7 +509,7 @@ Run server$ hexo server</div>
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -260,6 +530,23 @@ Run server$ hexo server</div>
       <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
     </div>
     
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
 
     
 
@@ -288,10 +575,39 @@ Run server$ hexo server</div>
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
 
 <!-- Plugins -->
+
+
+  
+
+  
+
+  
+    <!-- Tencent Analytics -->
+    <script defer>
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "");
+        
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
 
 
 
@@ -310,10 +626,10 @@ Run server$ hexo server</div>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "&nbsp;",
+        "都说帅的人说话只说一半，简直是在放. . .&nbsp;",
       ],
       cursorChar: "_",
-      typeSpeed: 70,
+      typeSpeed: 50,
       loop: false,
     });
     typed.stop();

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>页面走丢啦~ - Johnny</title>
+  <title>关于 - Johnny</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -43,7 +43,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -111,7 +111,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/nav1.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -124,10 +124,6 @@
           </div>
 
           
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
-          
         </div>
       </div>
     </div>
@@ -135,16 +131,48 @@
 
   <main>
     
+      <div class="container nopadding-md">
+        <div class="py-5 z-depth-3" id="board"
+          >
+          
+            <div class="about-avatar">
+              <img src="/img/avatar.png" srcset="/img/loading.gif"
+                   class="img-fluid z-depth-1"
+                   alt="avatar">
+            </div>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="text-center">
+  <p class="h3">阿炜</p>
+  <p>烟酒僧 / AI炼丹师 / web开发</p>
+  
+    
+    
+    
+    <a href="https://github.com/JohnnyMu" target="_blank" rel="noopener" class="h4 px-1 false">
+      <i class="fab fa-github" aria-hidden="true"></i>
       
+    </a>
+  
+    
+    
+    
+    
+</div>
+<div class="mt-5 markdown-body">
+  <p>#关于我<br>测试</p>
 
-<script>
-  function redirect() {
-    location.href = "/";
-  }
+</div>
 
-  //setTimeout(redirect, 3000)
-</script>
-
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
   </main>
 
@@ -286,7 +314,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Page not found&nbsp;",
+        "关于&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 50,

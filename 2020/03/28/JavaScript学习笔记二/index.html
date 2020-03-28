@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" type="image/png" href="/img/favicon.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>JavaScript学习笔记二 - Johnny</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Johnny's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/nav2.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期六, 三月 28日 2020, 5:14 下午
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    2.8k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      12 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：星期六, 三月 28日 2020, 5:18 下午</p>
+            
+            <div class="markdown-body">
+              <p>数组是值的有序集合。每个值叫做一个元素，而每个元素在数组中的位置，以数字表示，称为索引。<br>JavaScript数组是JavaScript对象的特殊形式，数组索引实际上和碰巧是整数的属性名差不多。通常，数组的实现是经过优化的，用数字索引来访问数组元素一般来说比访问常规的对象属性要快很多<br>JavaScript数组可以包含任意数据类型</p>
+<h2 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h2><ol>
+<li>使用数组字面量<code>[]</code><br>JavaScript数组可以包含任意数据类型<pre><code class="javascript"> var arr = [1,2,&#39;hello&#39;,null,undefined,true,{&#39;hei&#39;:&#39;黑&#39;},[1,2]];
+ arr.length;//8</code></pre>
+ 如果直接省略数组中某个值将被赋予<code>undefined</code>值</li>
+</ol>
+<pre><code>```javascript
+var count=[1,,3];
+count[1];//undefined
+var undefs = [,,];//数组有个两个元素都是undefined,索引已经定义
+```
+因为数组字面量语法允许有可选的结尾的逗号，故`[,,]`只有两个元素而非三个</code></pre><ol start="2">
+<li><p>调用构造函数<code>Array()</code></p>
+<pre><code class="javascript"> var a = new Array()//空数组，等同于数组字面量[].
+ var b = new Array(10)//创建指定长度的数组，此时数组中没有元素，甚至索引属性‘0’、‘1’都未定义
+ b.length();//10
+ 0 in b;//false
+ var c = new Array(1,2,&#39;hello&#39;,null,undefined,true,{&#39;hei&#39;:&#39;黑&#39;},[1,2])
+ //创建一数组，构造函数的参数将会成为新数组的元素，使用个数组字面量比使用构造函数要简单</code></pre>
+<h2 id="数组的读写"><a href="#数组的读写" class="headerlink" title="数组的读写"></a>数组的读写</h2><p>使用<code>[]</code>操作符来访问修改数组中的一个元素</p>
+</li>
+</ol>
+<pre><code class="javascript">arr[0];//读取下标为0的元素，1
+arr[8] = &#39;end&#39;;//在下标为8的地方写入数据
+arr.length;//9
+arr[-1.23] = true;//这将创建一个名为‘-1.23’的属性
+arr[&#39;1000&#39;] = 0;
+arr.length;//9,不变
+arr[1.000];//与a[1]相等</code></pre>
+<h2 id="数组的长度"><a href="#数组的长度" class="headerlink" title="数组的长度"></a>数组的长度</h2><p>每个数组有一个<code>length</code>属性，就是这个属性使其区别于其他常规的JavaScript对象。</p>
+<pre><code class="javascript">arr.length;//9
+arr.length = 3;//现在arr为[1,2,&#39;hello&#39;]
+arr.length = 0;//删除所有元素，a为[];
+arr.length = 5;//长度为5，没有元素，就像new Array(5)</code></pre>
+<h2 id="数组元素的添加和删除"><a href="#数组元素的添加和删除" class="headerlink" title="数组元素的添加和删除"></a>数组元素的添加和删除</h2><ul>
+<li>添加</li>
+</ul>
+<ol>
+<li><p>添加数组元素最简单的方法：为新索引赋值：</p>
+<pre><code class="javascript"> a = []   //空数组
+ a[0] = 1;//[1]
+ a[2] = 2;//[1,,2]</code></pre>
+</li>
+<li><p>使用<code>push()</code>和<code>pop()</code></p>
+<pre><code class="javascript"> a = [0];
+ a.push(1);//向末尾添加一个元素。 [0,1]
+ a.unshift(0);//向开头添加一个元素。[0,0,1]</code></pre>
+</li>
+</ol>
+<ul>
+<li>删除</li>
+</ul>
+<ol>
+<li><p><code>delete()</code>,类似于赋值undefined，不会影响数组长度</p>
+<pre><code class="javascript"> a =[1,2,3];
+ delete a[1];
+ 1 in a;//false
+ a.length;//3</code></pre>
+</li>
+<li><p><code>pop()</code> <code>shift()</code></p>
+<pre><code class="javascript"> a = [1,2,3];
+ a.shift();//移除开头元素,[2,3]
+ a.pop();//移除末尾元素，[2]</code></pre>
+<p>最后一个可删除，可添加的方法<code>splice()</code>,详细内容往下看</p>
+<h2 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h2></li>
+<li><p><code>for</code>循环<br>最常用</p>
+</li>
+<li><p><code>for in</code>循环，遍历的是索引<br>for in可以遍历对象，也可遍历数组，但遍历数组的时候有些问题</p>
+<blockquote>
+<p>1.index索引为字符串型数字，不能直接进行几何运算<br>2.遍历顺序有可能不是按照实际数组的内部顺序<br>3.使用for in会遍历数组所有的可枚举属性，包括原型。所以for in更适合遍历对象，不要使用for in遍历数组</p>
+</blockquote>
+</li>
+<li><p><code>for of</code>循环（ES6），遍历的是元素。</p>
+<pre><code class="javascript"> Array.prototype.method=function(){
+ 　　console.log(this.length);
+ }
+ var myArray=[1,2,4,5,6,7]
+ myArray.name=&quot;数组&quot;;
+ for (var value of myArray) {
+   console.log(value);
+ }
+ //1 2 4 5 6 7</code></pre>
+<blockquote>
+<pre><code>记住，for in遍历的是数组的索引（即键名），而for of遍历的是数组元素值。</code></pre><p>for of遍历的只是数组内的元素，而不包括数组的原型属性method和索引name</p>
+</blockquote>
+</li>
+<li><p><code>forEach()</code> (ES5)</p>
+<pre><code class="javascript"> var a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];
+ a.forEach(function (element) {
+     console.log(element);
+ });//A,B,C</code></pre>
+<p> forEach()方法无法再所有元素都传递给调用函数之前终止遍历。也就是说，没有像for循环中使用的相应的break语句。如果要提前终止，必须把forEach()方法放在一个try中，并抛出一个异常。</p>
+<h2 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h2></li>
+</ol>
+<ul>
+<li><p><code>Array.concat(item...)</code><br>该方法产生一个新数组，它包含一份array的赋值并把一个或多个item附加在它后面</p>
+<pre><code class="javascript">  var a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];
+  var b = [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;];
+  var c = a.concat(b,true);
+  //[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,true]</code></pre>
+</li>
+<li><p><code>Array.join(separator)</code><br>把一个array构造成一个字符串。他把array中的每个元素使用<code>separator</code>连接起来，构成一个字符串，默认的<code>separator</code> 是<code>,</code>，无间隔连接使用空字符串<code>&#39;&#39;</code></p>
+<pre><code class="javascript">  var a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];
+  var c = a.join(&#39;&#39;);//&#39;ABC&#39;</code></pre>
+</li>
+<li><p><code>Array.reverse()</code><br>翻转array里的元素的排序，并返回array本身：</p>
+<pre><code class="javascript">  var a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];
+  a.reverse();//a和b都是[&#39;C&#39;,&#39;B&#39;,&#39;A&#39;]</code></pre>
+</li>
+<li><p><code>Array.slice(start,end)</code><br>对array中的一段做浅复制。首先复制<code>array[start]</code>,一直复制到<code>array[end]</code>为止。<code>end</code>参数是可选的，默认是该数组的长度<code>array.length</code>。</p>
+<pre><code class="javascript">  var a = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];
+  b = a.slice(0,1);//[&#39;A&#39;]
+  c = a.slice(1);//[&#39;B&#39;,&#39;C&#39;]
+  d = a.slice(4);//[]</code></pre>
+</li>
+<li><p><code>Array.sort(comparefn)</code><br><code>sort</code>方法对array中的内容进行排序。他不能正确的给一组数字排序：</p>
+<pre><code class="javascript">  var a = [4,8,15,16,23,42];
+  a.sort();//Array(6) [15, 16, 23, 4, 42, 8]</code></pre>
+<p>  JavaScript的默认比较函数把要排序的元素都视为字符串。，比较数字的时候，会把他们转换为字符串，于是得到了一个错误结果。<br>  幸运的是可以使用自己的比较函数，你的比较函数接受两个参数，并且如果相等返回0，如果第一个参数在前，则返回一个负数，如果第二个参数应在前，则返回一个正数。</p>
+<pre><code class="javascript">  var a = [4,8,15,16,23,42];
+  a.sort(function(a,b){
+      return a-b
+  });//Array(6) [4, 8, 15, 16, 23, 42]</code></pre>
+</li>
+<li><p><code>array.splice (start,deleteCount,item...)</code><br><code>splice</code>方法从array中移除一个或者多个元素，并使用新的item替换他们。参数<code>start</code>是从数组array中移除元素的开始位置。参数<code>deleteCount</code>是要移除的元素个数。如果有额外参数那些<code>item</code>会插入到被移除元素的位置上</p>
+<pre><code class="javascript">  var arr = [&#39;Microsoft&#39;, &#39;Apple&#39;, &#39;Yahoo&#39;, &#39;AOL&#39;, &#39;Excite&#39;, &#39;Oracle&#39;];
+  // 从索引2开始删除3个元素,然后再添加两个元素:
+  arr.splice(2, 3, &#39;Google&#39;, &#39;Facebook&#39;); // 返回删除的元素 [&#39;Yahoo&#39;, &#39;AOL&#39;, &#39;Excite&#39;]
+  arr; // [&#39;Microsoft&#39;, &#39;Apple&#39;, &#39;Google&#39;, &#39;Facebook&#39;, &#39;Oracle&#39;]
+  // 只删除,不添加:
+  arr.splice(2, 2); // [&#39;Google&#39;, &#39;Facebook&#39;]
+  arr; // [&#39;Microsoft&#39;, &#39;Apple&#39;, &#39;Oracle&#39;]
+  // 只添加,不删除:
+  arr.splice(2, 0, &#39;Google&#39;, &#39;Facebook&#39;); // 返回[],因为没有删除任何元素
+  arr; // [&#39;Microsoft&#39;, &#39;Apple&#39;, &#39;Google&#39;, &#39;Facebook&#39;, &#39;Oracle&#39;]</code></pre>
+</li>
+<li><p><code>map()</code>(ES5)<br>举例说明，比如我们有一个函数f(x)=x^2^，要把这个函数作用在一个数组[1, 2, 3, 4, 5, 6, 7, 8, 9]上，就可以用map实现如下:<br><img src="https://img-blog.csdnimg.cn/20200214165103406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="map"></p>
+<pre><code class="javascript">  function pow(x) {
+      return x * x;
+  }
+  var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var results = arr.map(pow); // [1, 4, 9, 16, 25, 36, 49, 64, 81]
+  console.log(results);</code></pre>
+</li>
+<li><p><code>filter()</code><br>它用于把Array的某些元素过滤掉，然后返回剩下的元素。<br>和<code>map()</code>类似，Array的<code>filter()</code>也接收一个函数。和<code>map()</code>不同的是，<code>filter()</code>把传入的函数依次作用于每个元素，然后根据返回值是<code>true</code>还是<code>false</code>决定保留还是丢弃该元素。</p>
+<pre><code class="javascript">  //删除偶数，保留奇数
+  var arr = [1, 2, 4, 5, 6, 9, 10, 15];
+  var r = arr.filter(function (x) {
+      return x % 2 !== 0;
+  });
+  r; // [1, 5, 9, 15]</code></pre>
+<p>  <code>filter()</code>接收的回调函数，其实可以有多个参数。通常我们仅使用第一个参数，表示Array的某个元素。回调函数还可以接收另外两个参数，表示元素的位置和数组本身：</p>
+</li>
+</ul>
+<pre><code>```javascript
+//去处Array的重复元素
+var r,arr = [&#39;apple&#39;, &#39;strawberry&#39;, &#39;banana&#39;, 
+    &#39;pear&#39;, &#39;apple&#39;, &#39;orange&#39;, &#39;orange&#39;, &#39;strawberry&#39;];
+r = arr.filter(function (element, index, self) {
+    return self.indexOf(element) === index;
+});
+```</code></pre><ul>
+<li><p><code>every()</code>与<code>some()</code><br><code>every()</code>方法像是数学中的量词 $\forall$：当且仅当对数组中的所有元素调用判定函数都返回<code>true</code>，他才返回<code>true</code></p>
+<pre><code class="javascript">  var arr = [&#39;Apple&#39;, &#39;pear&#39;, &#39;orange&#39;];
+  console.log(arr.every(function (s) {
+      return s.length &gt; 0;
+  })); // true, 因为每个元素都满足s.length&gt;0</code></pre>
+<p>  <code>some()</code>方法则像数学中的量词 $\exists$：当数组中至少有一个元素调用判定函数返回<code>true</code>，他就返回<code>true</code>，否则返回<code>false</code></p>
+</li>
+</ul>
+<pre><code>```javascript
+var arr = [&#39;Apple&#39;, &#39;pear&#39;, &#39;orange&#39;];
+    console.log(arr.every(function (s) {
+        return s.length &lt;5;
+    })); // true, 因为存在&#39;pear&#39;长度小于5
+```</code></pre><ul>
+<li><p><code>reduce()</code>和<code>reduceRight()</code><br>Array的<code>reduce()</code>把一个函数作用在这个Array的<code>[x1, x2, x3...]</code>上，这个函数必须接收两个参数，<code>reduce()</code>把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
+<pre><code>  [x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)</code></pre><pre><code class="javascript">  //用reduce求和
+  var arr = [1, 3, 5, 7, 9];
+  arr.reduce(function (x, y) {
+      return x + y;
+  }); // 25</code></pre>
+<p>  <code>reduceRight()</code>的原理相同，只是方向相反</p>
+</li>
+<li><p><code>find(function(currentValue, index, arr))</code>（ES6）、<code>findIndex(function(currentValue, index, arr))</code>（ES6）、<code>indexOf(item,start)</code>、<code>lastIndexOf(item,start)</code>和<code>includes(searchElement, fromIndex)</code><br><code>find()</code> 方法返回数组中满足提供的测试函数的第一个元素的值。<code>currentValue</code>必选参数，当前元素。<code>index</code>可选参数，当前元素索引。</p>
+<pre><code class="javascript">  var ages = [3, 10, 18, 20];
+  function checkAdult(age) {
+      return age &gt;= 18;
+  }
+  var value = ages.find(checkAdult);
+  //18</code></pre>
+<p>  <code>findIndex()</code>方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回<code>-1</code></p>
+</li>
+</ul>
+<pre><code>```javascript
+var ages = [3, 10, 18, 20];
+function checkAdult(age) {
+        return age &gt;= 18;
+    }
+var value = ages.findIndex(checkAdult);
+    //2
+```
+`indexOf()`方法返回在数组中可以找到给定元素的第一个索引，如果不存在，则返回`-1`，`item`是要找的元素，`start`是开始位置（可选，默认`0`）
+```javascript
+var fruits=[&quot;Banana&quot;,&quot;Orange&quot;,&quot;Apple&quot;,&quot;Mango&quot;,&quot;Banana&quot;,&quot;Orange&quot;,&quot;Apple&quot;];
+var a = fruits.indexOf(&quot;Apple&quot;,4);//6
+```
+`lastIndexOf()` 方法可返回一个指定的元素在数组中最后出现的位置，从该字符串的后面向前查找。如果要检索的元素没有出现，则该方法返回 `-1`
+```javascript
+var fruits=[&quot;Banana&quot;,&quot;Orange&quot;,&quot;Apple&quot;,&quot;Mango&quot;,&quot;Banana&quot;,&quot;Orange&quot;,&quot;Apple&quot;];
+var a = fruits.lastIndexOf(&quot;Apple&quot;,4);//2
+```
+`includes()` 方法用来判断一个数组是否包含一个指定的值，如果是返回 `true`，否则`false`。`searchElement` 必须参数，需要查找的元素值。`fromIndex` 可选参数，从该索引处开始查找
+```javascript
+[1, 2, 3].includes(2);     // true
+[1, 2, 3].includes(4);     // false
+[1, 2, 3].includes(3, 3);  // false
+[1, 2, 3].includes(3, -1); // true
+[1, 2, NaN].includes(NaN); // true
+```</code></pre><ul>
+<li><p><code>Array.isArray(obj)</code><br>  isArray() 方法用于判断一个对象是否为数组。如果对象是数组返回 true，否则返回 false。</p>
+<pre><code class="javascript">  Array.isArray([]) ;// true
+  Arrray.isArray({});//false</code></pre>
+<h2 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h2><p>JavaScript数组的有一些特性是其他对象没有的：</p>
+</li>
+<li><p>当有新的元素添加到数组时，自动更新length属性。</p>
+</li>
+<li><p>设置length为一个较小值将截断数组。</p>
+</li>
+<li><p>从Array.prototype 中级证一些有用的方法。</p>
+</li>
+<li><p>其类属性为‘Array’ </p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/28/%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6%E7%90%86%E8%A7%A3%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">同源限制理解与解决</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/28/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">JavaScript学习笔记一</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+                <!-- Comments -->
+                <div class="comments" id="comments">
+                  
+                  
+
+                </div>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+    <!-- Tencent Analytics -->
+    <script defer>
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "");
+        
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript学习笔记二&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 50,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

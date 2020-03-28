@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" type="image/png" href="/img/favicon.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>Promise理解与实现 - Johnny</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Johnny's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/nav2.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期六, 三月 28日 2020, 5:51 下午
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      7 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：星期六, 三月 28日 2020, 5:53 下午</p>
+            
+            <div class="markdown-body">
+              <h2 id="promise解决了什么问题"><a href="#promise解决了什么问题" class="headerlink" title="promise解决了什么问题"></a>promise解决了什么问题</h2><p>JavaScript是单线程的，所以我们要用一些异步编程方案来实现异步。<br>回调函数就是其中的一种方案，比如说在node中写读取一个文件，使用回调函数这是没有问题的。</p>
+<pre><code class="javascript">fs.readFile(&#39;/etc/passwd&#39;, function (err, data) {
+  if (err) throw err;
+  console.log(data);
+});</code></pre>
+<p>但如果新的需求是必须先读取A文件，才能读取B文件</p>
+<pre><code class="javascript">fs.readFile(fileA, function (err, data) {
+    fs.readFile(fileB, function (err, data) {    
+          //...
+          })
+});</code></pre>
+<p>不难想象，如果依次读取多个文件，就会出现多重嵌套。代码不是纵向发展，而是横向发展，很快就会乱成一团，无法管理。这种情况就称为”回调地狱”（callback hell）。<br>而<code>promise</code>就是为了解决这个问题而生的</p>
+<h2 id="什么是promise"><a href="#什么是promise" class="headerlink" title="什么是promise"></a>什么是promise</h2><p>它不是新的语法功能，而是一种新的写法，允许将回调函数的横向加载，改成纵向加载。采用Promise，连续读取多个文件，写法如下。</p>
+<pre><code class="javascript">var readFile = require(&#39;fs-readfile-promise&#39;);
+readFile(fileA)//读取文件A
+.then(function(data){//如果读取成功则执行该函数，打印数据
+  console.log(data.toString());
+}).then(function(){//如果打印成功，则开始读取文件B
+  return readFile(fileB);
+}).then(function(data){//如果文件B读取成功，则打印文件B的数据
+  console.log(data.toString());
+}).catch(function(err) {//过程中发生任何错误则捕获，打印该错误
+  console.log(err);
+});</code></pre>
+<p>上面代码中，我使用了 <code>fs-readfile-promise</code> 模块，它的作用就是返回一个 Promise 版本的 <code>readFile</code> 函数。Promise 提供 <code>then</code> 方法加载回调函数，<code>catch</code>方法捕捉执行过程中抛出的错误。看起来清爽多了<br>再来看一段伪代码</p>
+<pre><code class="javascript">//传统写法（层层嵌套，可读性差）：
+step1(function (value1) { 
+  step2(value1, function(value2) { 
+    step3(value2, function(value3) { 
+      step4(value3, function(value4) { // ... });
+     }); 
+  });
+});
+
+//Promises的写法（清晰舒服）：
+(new Promise(step1))
+  .then(step2)
+  .then(step3)
+  .catch(step4);</code></pre>
+<p>promise对象，说白了，就是个代理，充当异步操作与回调函数之间的中介。简单的说就是：每一个异步任务会立刻返回一个Promise对象。Promises对象有一个<code>then</code>方法，允许指定回调函数，在异步任务完成后调用。如果异步任务失败则使用<code>catch</code>捕捉。</p>
+<h3 id="Promise-的状态"><a href="#Promise-的状态" class="headerlink" title="Promise 的状态"></a>Promise 的状态</h3><p>等待（<code>pending</code>）：初始状态。<br>已完成（<code>fulfilled</code>）：意味着操作成功完成。<br>已失败（<code>rejected</code>）：意味着操作失败。</p>
+<p>Promise对象的状态只可能处于这三种之一，它的状态改变只可能是两种可能：从 Pending 变为 <code>fulfilled</code> 和从 <code>Pending</code> 变为 <code>Rejected</code>。一旦状态发生改变，就不会再变，这也是<code>Promise[承诺]</code>这个名字的由来。</p>
+<h3 id="promise的使用"><a href="#promise的使用" class="headerlink" title="promise的使用"></a>promise的使用</h3><p>再来看一个简单的例子</p>
+<pre><code class="javascript">function getNumber(num){
+  return new Promise(function(resolve,reject){//返回一个promise对象
+      if(num &gt; 5){
+        resolve(num)//如果数字大于5则，执行resolve
+      }else{
+        reject(&#39;数字太小&#39;)}//否则执行reject
+  })
+}
+function printData(data){
+    console.log(&#39;resolve&#39;);
+    console.log(data);
+  }
+function printError(data){
+    console.log(&#39;reject&#39;);
+    console.log(data);
+}
+getNumber(4).then(printData).catch(printError);//reject 4
+getNumber(6).then(printData).catch(printError);//resolve 6</code></pre>
+<p>当<code>promise</code>执行了<code>resolve</code>语句（模拟异步操作执行成功），那么<code>promise</code>的状态就回变为<code>resolve</code>，可以使用<code>then</code>方法，调用传入的回调函数，而回调函数的参数就是<code>resolve</code>中返回的数据。<br>相反<br>promise执行了<code>reject</code>语句（模拟异步操作执行失败），那么promise的状态就回变为<code>reject</code>，可以使用<code>catch</code>方法，调用传入的回调函数，而回调函数的参数就是reject中返回的数据。</p>
+<h3 id="promise的其他方法"><a href="#promise的其他方法" class="headerlink" title="promise的其他方法"></a>promise的其他方法</h3><h4 id="promise-all"><a href="#promise-all" class="headerlink" title="promise.all"></a>promise.all</h4><p><code>Promise.all(iterable)</code> 方法返回一个 <code>Promise</code> 实例，此实例在 <code>iterable</code> 参数内所有的 <code>promise</code> 都“<code>完成（resolved）</code>”或参数中不包含 <code>promise</code> 时回调<code>完成（resolve）</code>；如果参数中  <code>promise</code> 有一个<code>失败（rejected）</code>，此实例回调<code>失败（reject）</code>，失败原因的是第一个失败 <code>promise</code> 的结果<br>将两个promise对象拼成一个数组传进<code>all</code>方法。看有没有失败，有一个失败的，则整个<code>all</code>方法产生的promise对象失败。<br>大白话就是看哪个先失败。如果都成了，就另说。</p>
+<pre><code class="javascript">const p1 = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+        resolve(&#39;hello&#39;);
+}, 1000);
+})
+const p2 = new Promise((resolve, reject) =&gt; {
+    resolve(1);
+  })
+ Promise.all([p1,p2]).then(//传入的是两个promise对象
+    result=&gt;console.log(result)
+  ).catch(
+    e=&gt;console.log(e)        
+  )// Array(2) [&quot;hello&quot;, 1]</code></pre>
+<p>将因为两个<code>promise</code>对象的状态都是已完成，所以返回的是数组，包含着两个<code>promise</code>的回调参数<br>在看另外一个例子</p>
+<pre><code class="javascript">const p1 = new Promise((resolve, reject) =&gt; {
+        resolve(&#39;第一个任务&#39;);
+})
+const p2 = new Promise((resolve,reject) =&gt;{
+    setTimeout(() =&gt; {
+        reject(&#39;第二个任务&#39;)
+    }, 1000);
+})
+const p3 = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+        reject(&#39;第三个任务&#39;);    
+    }, 500);
+  })
+Promise.all([p1,p2,p3]).then(
+    result=&gt;console.log(result)
+  ).catch(
+    e=&gt;console.log(e)        
+  )//第三个任务</code></pre>
+<p>执行结果打印的是第三个任务，细品这段代码就能明白<code>Promise.all</code>干的是啥了</p>
+<h4 id="promise-all的实现"><a href="#promise-all的实现" class="headerlink" title="promise.all的实现"></a><code>promise.all</code>的实现</h4><pre><code class="javascript">/** 仅考虑 promises 传入的是数组的情况时 */
+Promise.all = function (promise) {
+    let promises = Array.from(promise)//将iterator转换为数组
+    return new Promise((resolve, reject) =&gt; {
+        if (promises.length === 0) {//如果数组长度为0则返回空数组
+            resolve([]);
+        } else {
+            let result = [];//存放已成功的异步操作
+            let index = 0;//记录已成功的操作数
+            for (let i = 0;  i &lt; promises.length; i++ ) {
+                Promise.resolve(promises[i])//执行每一个promise
+                    .then(data =&gt; {
+                        result[i] = data;
+                        if (++index === promises.length) {
+                        //所有的 promises 状态都是 fulfilled，promise.all返回的实例才变成 fulfilled 态
+                            resolve(result);
+                    }
+                }, err =&gt; {
+                    reject(err);
+                    return;
+                });
+            }
+        }
+    });
+}</code></pre>
+<h4 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a><code>Promise.race()</code></h4><p><code>Promise.race(iterable)</code> 方法返回一个 <code>promise</code>，一旦迭代器中的某个<code>promise</code>解决或拒绝，返回的 <code>promise</code>就会解决或拒绝<br>举个例子</p>
+<pre><code class="javascript">const p1 = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+         resolve(&#39;第一个任务&#39;);
+    }, 200);
+})
+const p2 = new Promise((resolve,reject) =&gt;{
+    setTimeout(() =&gt; {
+        reject(&#39;第二个任务&#39;)
+    }, 1000);
+})
+const p3 = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+        resolve(&#39;第三个任务&#39;);    
+    }, 500);
+  })
+Promise.all([p1,p2,p3]).then(
+    result=&gt;console.log(result)
+  ).catch(
+    e=&gt;console.log(e)        
+  )//第一个任务</code></pre>
+<p>只要其中一个实例先改变状态，状态就跟着改变将率先改变的<code>Promise</code>返回值传递给回调函数，大白话：看谁快</p>
+<h4 id="Promise-race-实现"><a href="#Promise-race-实现" class="headerlink" title="Promise.race()实现"></a><code>Promise.race()</code>实现</h4><pre><code class="javascript">var race = function(promise) {
+    let promises = Array.from(promise)
+    return new Promise(function(resolve, reject) {
+        for (var i = 0; i &lt; promises.length; i++) {
+                Promise.resolve(promises[i]).then(data =&gt; {
+                resolve(data);
+                    }, err =&gt; {
+                      return reject(err)
+        })
+      }
+    })
+  }</code></pre>
+<h4 id="Promise-resolve-和Promise-reject"><a href="#Promise-resolve-和Promise-reject" class="headerlink" title="Promise.resolve()和Promise.reject()"></a><code>Promise.resolve()</code>和<code>Promise.reject()</code></h4><pre><code class="javascript">// Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为rejected
+const p = Promise.reject(&#39;出错了&#39;);
+// 等同于
+const p = new Promise((resolve, reject) =&gt; reject(&#39;出错了&#39;))
+
+p.then(null, function (s) {
+  console.log(s)      // 出错了
+});</code></pre>
+<pre><code class="javascript">Promise.resolve(&#39;foo&#39;)
+// 等价于
+new Promise(resolve =&gt; resolve(&#39;foo&#39;))</code></pre>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023024413276544" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/1022910821149312/1023024413276544</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/12/asynchronous%EF%BC%BFjavascript.html</a></li>
+<li><a href="https://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">https://es6.ruanyifeng.com/#docs/promise</a></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/28/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A52-0/">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">Vue实战：知乎日报2.0</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/28/%E5%90%8C%E6%BA%90%E9%99%90%E5%88%B6%E7%90%86%E8%A7%A3%E4%B8%8E%E8%A7%A3%E5%86%B3/">
+                        <span class="hidden-mobile">同源限制理解与解决</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+              
+                <!-- Comments -->
+                <div class="comments" id="comments">
+                  
+                  
+
+                </div>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var toc = $('#toc');
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = boardCtn.css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+    <!-- Tencent Analytics -->
+    <script defer>
+      var _mtac = {};
+      (function () {
+        var mta = document.createElement("script");
+        mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "");
+        
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Promise理解与实现&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 50,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

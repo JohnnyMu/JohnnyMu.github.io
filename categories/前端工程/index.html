@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>页面走丢啦~ - Johnny</title>
+  <title>分类 - 前端工程 - Johnny</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -43,7 +43,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -111,7 +111,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/nav1.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -124,10 +124,6 @@
           </div>
 
           
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
-          
         </div>
       </div>
     </div>
@@ -135,16 +131,37 @@
 
   <main>
     
+      <div class="container nopadding-md">
+        <div class="py-5 z-depth-3" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+<!--  <p class="h4">共计 1 篇文章</p>-->
+  <hr>
+  
+    
       
+      <p class="h5">2020</p>
+    
+    <a href="/2020/03/28/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A52-0/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Vue实战：知乎日报2.0</span>
+      <span style="float: right;">03-28</span>
+    </a>
+  
+</div>
 
-<script>
-  function redirect() {
-    location.href = "/";
-  }
 
-  //setTimeout(redirect, 3000)
-</script>
 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
   </main>
 
@@ -286,7 +303,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Page not found&nbsp;",
+        "分类 - 前端工程&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 50,
