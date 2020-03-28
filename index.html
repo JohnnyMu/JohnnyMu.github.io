@@ -150,7 +150,7 @@
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/28/%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0%EF%BC%9A%E9%98%B2%E7%9B%97%E9%93%BE%E4%B8%8Ex-tengine-error-denied-by-Referer-ACL/" target="_self">
-          <img src="/img/blog-post2.jpg" srcset="/img/loading.gif" alt="踩坑日记：防盗链与x-tengine-error: denied by Referer ACL"
+          <img src="/img/blog-post4.jpg" srcset="/img/loading.gif" alt="踩坑日记：防盗链与x-tengine-error: denied by Referer ACL"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
@@ -166,14 +166,15 @@
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">踩坑之前的写的知乎日报项目https://blog.csdn.net/johnny_mu/article/details/105128678
+          <div class="index-text mb-1">踩坑之前写的知乎日报项目 项目地址
 客户端曾爆出了这个403错误
 
 看起来好像是css文件被跨域限制了，无法引用。那就用之前图片的代理服务器转发一下就好了。
 
 我一开始以为是跨域限制导致的css文件无法加载，所以用代理服务器转发一下，设置上相应header字段就好，问题确实就解决了。
 但是昨晚睡前一想，不对啊，css，图片等静态资源是不会被跨域限制的。于是我试了一下真正跨域限制的报错。果然不一样。再试一下，将图片代理服务器中的取消跨域限制的代码注释掉
-res.setHeader(&#39;</div>
+res.setHeader(&#39;Content-Type&#39;, contentType);
+// res.setHeader(&#3</div>
         </div>
       </a>
 
