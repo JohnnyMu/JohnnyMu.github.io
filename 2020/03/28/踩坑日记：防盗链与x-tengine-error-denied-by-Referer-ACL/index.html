@@ -133,7 +133,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    788 字
+                    812 字
                   </span>
                 
 
@@ -169,11 +169,11 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：星期六, 三月 28日 2020, 10:06 晚上</p>
+                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 1:02 下午</p>
             
             <div class="markdown-body">
               <h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>之前写的知乎日报项目 <a href="https://johnnymu.github.io/2020/03/28/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A52-0/" target="_blank" rel="noopener">点击查看</a></p>
-<p>客户端曾爆出了这个403错误</p>
+<p>在引用css文件时出现了bug，客户端显示出了403错误</p>
 <blockquote>
 <p><img src="https://img-blog.csdnimg.cn/20200328193008768.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>看起来好像是css文件被跨域限制了，无法引用。那就用之前图片的代理服务器转发一下就好了。</p>
 </blockquote>
@@ -218,9 +218,9 @@ res.end(body);</code></pre>
     }
     request.get(options, callback);
 });</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/2020032820280853.png" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>看到控制台输出</p>
+<p><img src="https://img-blog.csdnimg.cn/2020032820280853.png" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>看到终端输出，果然出现了同样的error</p>
 <p><img src="https://img-blog.csdnimg.cn/20200328202537488.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
-<p>出坑大吉。</p>
+<p>说明我们的想法是对的，出坑。</p>
 
             </div>
             <hr>
@@ -241,9 +241,9 @@ res.end(body);</code></pre>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/http/">http</a>
-                    
                       <a class="hover-with-bg" href="/tags/node/">node</a>
+                    
+                      <a class="hover-with-bg" href="/tags/http/">http</a>
                     
                   </span>
                 

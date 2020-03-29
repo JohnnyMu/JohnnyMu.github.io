@@ -167,14 +167,14 @@
         
         <div class="index-excerpt" >
           <div class="index-text mb-1">踩坑之前写的知乎日报项目 点击查看
-客户端曾爆出了这个403错误
+在引用css文件时出现了bug，客户端显示出了403错误
 
 看起来好像是css文件被跨域限制了，无法引用。那就用之前图片的代理服务器转发一下就好了。
 
 我一开始以为是跨域限制导致的css文件无法加载，所以用代理服务器转发一下，设置上相应header字段就好，问题确实就解决了。
 但是昨晚睡前一想，不对啊，css，图片等静态资源是不会被跨域限制的。于是我试了一下真正跨域限制的报错。果然不一样。再试一下，将图片代理服务器中的取消跨域限制的代码注释掉
 res.setHeader(&#39;Content-Type&#39;, contentType);
-// res.setHeader(&#3</div>
+// res</div>
         </div>
       </a>
 
@@ -193,9 +193,9 @@ res.setHeader(&#39;Content-Type&#39;, contentType);
           
             <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/http/">http</a>&nbsp;
-          
             <a href="/tags/node/">node</a>&nbsp;
+          
+            <a href="/tags/http/">http</a>&nbsp;
           
         
       </div>
