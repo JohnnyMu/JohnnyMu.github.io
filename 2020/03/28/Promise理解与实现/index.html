@@ -169,7 +169,7 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：星期六, 三月 28日 2020, 5:53 下午</p>
+                class="note note-warning">本文最后更新于：星期一, 三月 30日 2020, 4:05 下午</p>
             
             <div class="markdown-body">
               <h2 id="promise解决了什么问题"><a href="#promise解决了什么问题" class="headerlink" title="promise解决了什么问题"></a>promise解决了什么问题</h2><p>JavaScript是单线程的，所以我们要用一些异步编程方案来实现异步。<br>回调函数就是其中的一种方案，比如说在node中写读取一个文件，使用回调函数这是没有问题的。</p>
@@ -211,7 +211,7 @@ step1(function (value1) {
   .then(step2)
   .then(step3)
   .catch(step4);</code></pre>
-<p>promise对象，说白了，就是个代理，充当异步操作与回调函数之间的中介。简单的说就是：每一个异步任务会立刻返回一个Promise对象。Promises对象有一个<code>then</code>方法，允许指定回调函数，在异步任务完成后调用。如果异步任务失败则使用<code>catch</code>捕捉。</p>
+<p>promise对象充当异步操作与回调函数之间的中介。简单的说就是：每一个异步任务会立刻返回一个Promise对象。Promises对象有一个<code>then</code>方法，允许指定回调函数，在异步任务完成后调用。如果异步任务失败则使用<code>catch</code>捕捉。</p>
 <h3 id="Promise-的状态"><a href="#Promise-的状态" class="headerlink" title="Promise 的状态"></a>Promise 的状态</h3><p>等待（<code>pending</code>）：初始状态。<br>已完成（<code>fulfilled</code>）：意味着操作成功完成。<br>已失败（<code>rejected</code>）：意味着操作失败。</p>
 <p>Promise对象的状态只可能处于这三种之一，它的状态改变只可能是两种可能：从 Pending 变为 <code>fulfilled</code> 和从 <code>Pending</code> 变为 <code>Rejected</code>。一旦状态发生改变，就不会再变，这也是<code>Promise[承诺]</code>这个名字的由来。</p>
 <h3 id="promise的使用"><a href="#promise的使用" class="headerlink" title="promise的使用"></a>promise的使用</h3><p>再来看一个简单的例子</p>
@@ -234,7 +234,8 @@ function printError(data){
 getNumber(4).then(printData).catch(printError);//reject 4
 getNumber(6).then(printData).catch(printError);//resolve 6</code></pre>
 <p>当<code>promise</code>执行了<code>resolve</code>语句（模拟异步操作执行成功），那么<code>promise</code>的状态就回变为<code>resolve</code>，可以使用<code>then</code>方法，调用传入的回调函数，而回调函数的参数就是<code>resolve</code>中返回的数据。<br>相反<br>promise执行了<code>reject</code>语句（模拟异步操作执行失败），那么promise的状态就回变为<code>reject</code>，可以使用<code>catch</code>方法，调用传入的回调函数，而回调函数的参数就是reject中返回的数据。</p>
-<h3 id="promise的其他方法"><a href="#promise的其他方法" class="headerlink" title="promise的其他方法"></a>promise的其他方法</h3><h4 id="promise-all"><a href="#promise-all" class="headerlink" title="promise.all"></a>promise.all</h4><p><code>Promise.all(iterable)</code> 方法返回一个 <code>Promise</code> 实例，此实例在 <code>iterable</code> 参数内所有的 <code>promise</code> 都“<code>完成（resolved）</code>”或参数中不包含 <code>promise</code> 时回调<code>完成（resolve）</code>；如果参数中  <code>promise</code> 有一个<code>失败（rejected）</code>，此实例回调<code>失败（reject）</code>，失败原因的是第一个失败 <code>promise</code> 的结果<br>将两个promise对象拼成一个数组传进<code>all</code>方法。看有没有失败，有一个失败的，则整个<code>all</code>方法产生的promise对象失败。<br>大白话就是看哪个先失败。如果都成了，就另说。</p>
+<h3 id="promise的其他方法"><a href="#promise的其他方法" class="headerlink" title="promise的其他方法"></a>promise的其他方法</h3><h4 id="promise-all"><a href="#promise-all" class="headerlink" title="promise.all"></a>promise.all</h4><p><code>Promise.all(iterable)</code> 方法返回一个 <code>Promise</code> 实例，此实例在 <code>iterable</code> 参数内所有的 <code>promise</code> 都“<code>完成（resolved）</code>”或参数中不包含 <code>promise</code> 时回调<code>完成（resolve）</code>；如果参数中  <code>promise</code> 有一个<code>失败（rejected）</code>，此实例回调<code>失败（reject）</code>，失败原因的是第一个失败 <code>promise</code> 的结果。</p>
+<p>将两个promise对象拼成一个数组传进<code>all</code>方法。看有没有失败，有一个失败的，则整个<code>all</code>方法产生的promise对象失败。</p>
 <pre><code class="javascript">const p1 = new Promise((resolve, reject) =&gt; {
     setTimeout(() =&gt; {
         resolve(&#39;hello&#39;);
@@ -248,7 +249,8 @@ const p2 = new Promise((resolve, reject) =&gt; {
   ).catch(
     e=&gt;console.log(e)        
   )// Array(2) [&quot;hello&quot;, 1]</code></pre>
-<p>将因为两个<code>promise</code>对象的状态都是已完成，所以返回的是数组，包含着两个<code>promise</code>的回调参数<br>在看另外一个例子</p>
+<p>将因为两个<code>promise</code>对象的状态都是已完成，所以返回的是数组，包含着两个<code>promise</code>的回调参数</p>
+<p>在看另外一个例子</p>
 <pre><code class="javascript">const p1 = new Promise((resolve, reject) =&gt; {
         resolve(&#39;第一个任务&#39;);
 })

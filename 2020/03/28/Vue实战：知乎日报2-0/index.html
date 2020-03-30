@@ -169,7 +169,7 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：星期日, 三月 29日 2020, 1:05 下午</p>
+                class="note note-warning">本文最后更新于：星期一, 三月 30日 2020, 3:59 下午</p>
             
             <div class="markdown-body">
               <p>之前跟着《Vue.js实战》写过这个小项目，因为书中的代码比较久远，许多接口、webpack配置都失效了，但这个项目还是很好玩的，最近整理了一下，本文的代码都是相对于原书代码的补充。<br>完整代码:<a href="https://github.com/JohnnyMu/zhihuDaily" target="_blank" rel="noopener">https://github.com/JohnnyMu/zhihuDaily</a></p>
@@ -351,7 +351,7 @@ export default {
                 &quot;http://pic3.zhimg.com/91125c9aebcab1c84f58ce4f8779551e.jpg&quot;
             ],
             &quot;id&quot;: 8387524
-        },</code></pre><p>可以看到上面的stories中url就是文章对应知乎页面了，可以用一个<code>&lt;iframe&gt;</code>直接显示这个页面。但是为了尽量少动代码，还是将知乎的html源码保存下来，用v-html直接显示<br><strong>增加一个stories代理服务器</strong>，与之前类似</p>
+        },</code></pre><p>可以看到上面的stories中url就是文章对应知乎页面了，我们用v-html直接显示<br><strong>增加一个stories代理服务器</strong>，与之前类似</p>
 <pre><code class="javascript">//proxy.js
 const storiesServer = http.createServer((req, res) =&gt; {
     const url = &#39;https://daily.zhihu.com/story&#39; + req.url;
