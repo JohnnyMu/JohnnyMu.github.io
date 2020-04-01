@@ -169,10 +169,10 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：星期三, 四月 1日 2020, 4:36 下午</p>
+                class="note note-warning">本文最后更新于：星期三, 四月 1日 2020, 4:43 下午</p>
             
             <div class="markdown-body">
-              <p>话不多说，大家先看一段代码</p>
+              <p>不多说，大家先看一段代码</p>
 <pre><code class="javascript">console.log(&#39;script start&#39;);
 
 setTimeout(function() {
@@ -197,7 +197,7 @@ console.log(&#39;script end&#39;);</code></pre>
 <p>分清楚以后，再说一下这两条队列的执行逻辑。一段代码开始执行总会先执行一个<code>Task</code>队列中的第一任务，在上例中，第一个<code>Task</code>是整个<code>script</code>代码，也就是说，代码开始执行时，将全部<code>script</code>代码放入<code>Task</code>队列中，JavaScript开始执行其中的代码。遇到同步任务时，如<code>console.log()</code>，JavaScript会将他放入执行栈，立即执行。遇到异步任务时，先不管他，让他自己执行，执行完毕后，该任务会向任务队列发出信号，根据他的任务类型，放入不同的队列，以便执行后续的回调函数。如<code>setTimeout</code>在<code>0s</code>后向Task队列发出信号，将<code>setTimeout</code>的回调函数放入<code>Task</code>队列中，位置在<code>script</code>代码之后。遇到<code>promise</code>时，同样先让他自己执行，当他执行完毕，向<code>MicroTask</code>队列发出信号，将他的回调函数放入<code>Microtask</code>队列。</p>
 <p>当第一个<code>Task</code>，即<code>script</code>全部代码执行完毕后，会先执行所有<code>MicroTask</code>队列中的任务，执行的逻辑与之前相同，遇到同步代码立即执行，异步代码待自行完成后，将各自回调函数加入相应队列。</p>
 <p>当所有微任务完成后，JavaScript才会执行<code>Task</code>队列中的下个任务，即<code>setTimeout</code>的回调函数<code>console.log(&#39;setTimeout&#39;);</code>，以此往复循环（Event Loop）。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200401161628154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>下面是示例代码运行的动图<br><img src="https://img-blog.csdnimg.cn/20200401151228174.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20200401161628154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>下面是示例代码运行的动图<br><img src="https://img-blog.csdnimg.cn/20200401164245792.gif#pic_center" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>
 <h2 id="再来几个题，来巩固一下"><a href="#再来几个题，来巩固一下" class="headerlink" title="再来几个题，来巩固一下"></a>再来几个题，来巩固一下</h2><p><strong>题目：写出运行结果</strong></p>
 <pre><code class="javascript">setTimeout(function(){
     console.log(1);
