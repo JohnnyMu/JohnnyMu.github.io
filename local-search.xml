@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Vue实战：实现一个博客系统</title>
+    <link href="/2020/04/19/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"/>
+    <url>/2020/04/19/Vue%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
+    
+    <content type="html"><![CDATA[<p>最近想结合所学写一个项目，最后决定写一个博客系统，使用的技术栈为：</p><p>前端：Vue Vue-router element-ui </p><p>后端：express moogose jsonwebtoken</p><p>使用了vue-cli搭建项目</p><p><strong>仓库地址</strong>： <a href="https://github.com/JohnnyMu/vue-blog-master" target="_blank" rel="noopener">https://github.com/JohnnyMu/vue-blog-master</a></p><p>主页：<br><img src="https://img-blog.csdnimg.cn/20200425201447403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p><p>文章详情页：<br><img src="https://img-blog.csdnimg.cn/20200425201518158.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"><br>后台管理页面：<br><img src="https://img-blog.csdnimg.cn/2020042520155361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p><p>文章编辑页：<br><img src="https://img-blog.csdnimg.cn/20200425201617476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p><p>markdown实时预览：<br><img src="https://img-blog.csdnimg.cn/20200425201638341.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pvaG5ueV9tdQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="在这里插入图片描述"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目实战</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Event Loop 理解 </title>
     <link href="/2020/04/01/Event-Loop-%E7%90%86%E8%A7%A3/"/>
     <url>/2020/04/01/Event-Loop-%E7%90%86%E8%A7%A3/</url>
